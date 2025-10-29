@@ -1,0 +1,8 @@
+{
+  "tasks":[],
+  "settings":{
+    "app_name":"Task Manager",
+    "version":"1.0.0",
+    "max_tasks":100
+  }
+}
