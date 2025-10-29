@@ -1,0 +1,4 @@
+##secrets.yaml
+##So I've definitely already commity secrets.yaml to Github... it was empty
+##when I did it though so it should be fine
+*.secret
