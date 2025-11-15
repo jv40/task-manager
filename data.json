@@ -2,9 +2,11 @@
     "tasks": [
         {
             "id": 1,
-            "description": "somethn",
+            "description": "something",
             "priority": "high",
-            "completed": false
+            "completed": true,
+            "due_date": null,
+            "completion_date": "2025-11-15"
         }
     ],
     "settings": {
