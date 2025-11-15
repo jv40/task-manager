@@ -1,8 +1,15 @@
 {
-  "tasks":[],
-  "settings":{
-    "app_name":"Task Manager",
-    "version":"1.0.0",
-    "max_tasks":100
-  }
+    "tasks": [
+        {
+            "id": 1,
+            "description": "somethn",
+            "priority": "high",
+            "completed": false
+        }
+    ],
+    "settings": {
+        "app_name": "Task Manager",
+        "version": "1.0.0",
+        "max_tasks": 100
+    }
 }
