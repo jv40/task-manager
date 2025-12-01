@@ -1,34 +1,32 @@
 import json
-import os
+import sys
+DATA_FILE="data.json"
 
-DATA_FILE = "data.json"
-
-def load_data():
-    """Load tasks from JSON file or return empty list wrapper."""
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    return {"tasks": []}
+PRIORITY_ORDER={
+	"high":1,
+	"medium":2,
+	"low":3
+}
 
 def view_tasks():
-    """Display all tasks neatly with ID, status, priority, description."""
-    data = load_data()
-    tasks = data.get("tasks", [])
-
-    if not tasks:
-        print("No tasks available.")
-        return
-
-    print("\n Task List")
-    print("-" * 50)
-    for task in tasks:
-        status = " Completed" if task.get("completed") else " Not Completed"
-        print("ID:", task.get("id"))
-        print("Description:", task.get("description"))
-        print("Priority:", task.get("priority"))
-        print("Status:", status)
-        print("-" * 50)
-
-if __name__ == "__main__":
-    view_tasks()
-
+	show_completed="--show-completed" in sys.argv
+	with open(DATA_FILE,"r") as f:
+		data=json.load(f)
+	tasks=data["tasks"]
+	if not show_completed:
+		tasks=[t for t in tasks if not t["completed"]]
+	tasks.sort(key=lambda t: PRIORITY_ORDER.get(t["priority"],99))
+	if not tasks:
+		print("No tasks to display.")
+		return
+	for t in tasks:
+		status="Completed" if t["completed"] else "Pending"
+		due=t["due_date"] if t["due_date"] else "None"
+		print(f"[{t['id']}] {t['description']} ({t['priority']})")
+		print(f"       Due: {due}")
+		print(f"       Status: {status}")
+		if t["completion_date"]:
+			print(f"          Completed on: {t['completion_date']}")
+		print()
+if __name__=="__main__":
+	view_tasks()
